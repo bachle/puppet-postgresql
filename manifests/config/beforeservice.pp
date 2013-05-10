@@ -71,15 +71,7 @@ class postgresql::config::beforeservice(
     },
     order       => '001',
   }
-  postgresql::pg_hba_rule { 'local access to database with same name':
-    type        => 'local',
-    auth_method => 'ident',
-    auth_option => $postgresql::params::version ? {
-      '8.1'   => 'sameuser',
-      default => undef,
-    },
-    order       => '002',
-  }
+
   postgresql::pg_hba_rule { 'deny access to postgresql user':
     type        => 'host',
     user        => 'postgres',
